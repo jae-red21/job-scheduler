@@ -1,25 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
+import { task } from "../types/task";
 
-const AgentDashboard = () => {
+type AgentProps = {
+  tasks: task[];
+};
+
+const AgentDashboard = ({ tasks }: AgentProps) => {
+  const [taskList, setTaskList] = useState<task[]>(tasks);
+
+  const handleMarkComplete = (id: number) => {
+    setTaskList((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, isCompleted: true } : task
+      )
+    );
+  };
+
   return (
-    <div>
-      <div>
-        <h1>Welcome</h1>
-        <button type="submit">Add Task</button>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      {/* Header Section */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Welcome</h1>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+        >
+          Add Task
+        </button>
       </div>
-      <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Priority</th>
-                    <th>Created At</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
+
+      {/* Table Section */}
+      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+        <table className="min-w-full">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                Title
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                Priority
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                Created At
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                Supervisor
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {taskList.map((task) => (
+              <tr key={task.id} className="hover:bg-gray-50 transition duration-200">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {task.name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {task.priority}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {task.createdAt}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {task.supervisor_id}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                  <button
+                    onClick={() => handleMarkComplete(task.id)}
+                    className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300"
+                  >
+                    Complete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
