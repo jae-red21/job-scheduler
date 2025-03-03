@@ -1,12 +1,12 @@
-import React from 'react';
-import { task } from '../types/task';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { task } from "../types/task";
+import { NavLink } from "react-router-dom";
 
 type Props = {
-    tasks: task[]
-}
+  tasks: task[];
+};
 
-const SupervisorDashboard = ( {tasks}: Props) => {
+const SupervisorDashboard = ({ tasks }: Props) => {
   const theadStyle = "py-2 px-4 border-b font-semibold text-left";
 
   return (
@@ -14,12 +14,6 @@ const SupervisorDashboard = ( {tasks}: Props) => {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Welcome</h1>
-        <NavLink
-          to="/supervisor-dashboard/new-task"
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
-        >
-          Add Task
-        </NavLink>
       </div>
 
       {/* Table Section */}
@@ -36,8 +30,11 @@ const SupervisorDashboard = ( {tasks}: Props) => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {tasks.map(task => (
-                <tr key={task.id} className="hover:bg-gray-50 transition duration-200">
+            {tasks.map((task) => (
+              <tr
+                key={task.id}
+                className="hover:bg-gray-50 transition duration-200"
+              >
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                   {task.name}
                 </td>
@@ -51,9 +48,8 @@ const SupervisorDashboard = ( {tasks}: Props) => {
                   {task.isAssigned ? "Assigned" : "Not Yet"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                {task.isCompleted ? "Completed" : "Pending"}
+                  {task.isCompleted ? "Completed" : "Pending"}
                 </td>
-                
               </tr>
             ))}
           </tbody>
