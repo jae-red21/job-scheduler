@@ -36,7 +36,12 @@ const SupervisorDashboard = ({ tasks }: Props) => {
                 className="hover:bg-gray-50 transition duration-200"
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  {task.name}
+                  <NavLink
+                    to="/supervisor-dashboard/task-detail"
+                    className="hover:text-blue-400"
+                  >
+                    {task.name}
+                  </NavLink>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                   {task.priority}

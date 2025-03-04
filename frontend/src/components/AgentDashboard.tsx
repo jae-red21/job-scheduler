@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { task } from "../types/task";
+import { NavLink } from "react-router-dom";
 
 type AgentProps = {
   tasks: task[];
@@ -53,9 +54,17 @@ const AgentDashboard = ({ tasks }: AgentProps) => {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {taskList.map((task) => (
-              <tr key={task.id} className="hover:bg-gray-50 transition duration-200">
+              <tr
+                key={task.id}
+                className="hover:bg-gray-50 transition duration-200"
+              >
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  {task.name}
+                  <NavLink
+                    to="/agent-dashboard/task-detail"
+                    className="hover:text-blue-400"
+                  >
+                    {task.name}
+                  </NavLink>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                   {task.priority}

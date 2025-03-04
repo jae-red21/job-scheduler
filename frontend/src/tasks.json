@@ -1,48 +1,52 @@
 [
-    {
-      "id": 1,
-      "supervisor_id": 101,
-      "name": "Review Codebase",
-      "priority": 1,
-      "createdAt": "2023-11-25T09:00:00Z",
-      "isAssigned": true,
-      "isCompleted": false
-    },
-    {
-      "id": 2,
-      "supervisor_id": 102,
-      "name": "Update Documentation",
-      "priority": 2,
-      "createdAt": "2023-11-20T14:30:00Z",
-      "isAssigned": true,
-      "isCompleted": false
-    },
-    {
-      "id": 3,
-      "supervisor_id": 103,
-      "name": "Fix Login Bug",
-      "priority": 1,
-      "createdAt": "2023-11-18T11:45:00Z",
-      "isAssigned": true,
-      "isCompleted": true
-    },
-    {
-      "id": 4,
-      "supervisor_id": 104,
-      "name": "Optimize Database Queries",
-      "priority": 3,
-      "createdAt": "2023-11-22T08:15:00Z",
-      "isAssigned": true,
-      "isCompleted": false
-    },
-    {
-      "id": 5,
-      "supervisor_id": 105,
-      "name": "Design Landing Page",
-      "priority": 2,
-      "createdAt": "2023-11-19T16:00:00Z",
-      "isAssigned": true,
-      "isCompleted": true
-    }
-  ]
-  
+  {
+    "id": 1,
+    "supervisor_id": 101,
+    "name": "Review Codebase",
+    "priority": 1,
+    "createdAt": "2023-11-25T09:00:00Z",
+    "isAssigned": true,
+    "isCompleted": false,
+    "description": "Examine the codebase for improvements and identify any potential issues."
+  },
+  {
+    "id": 2,
+    "supervisor_id": 102,
+    "name": "Update Documentation",
+    "priority": 2,
+    "createdAt": "2023-11-20T14:30:00Z",
+    "isAssigned": true,
+    "isCompleted": false,
+    "description": "Ensure that the project documentation is up to date with recent changes."
+  },
+  {
+    "id": 3,
+    "supervisor_id": 103,
+    "name": "Fix Login Bug",
+    "priority": 1,
+    "createdAt": "2023-11-18T11:45:00Z",
+    "isAssigned": true,
+    "isCompleted": true,
+    "description": "Resolve the issue preventing users from logging in to the system."
+  },
+  {
+    "id": 4,
+    "supervisor_id": 104,
+    "name": "Optimize Database Queries",
+    "priority": 3,
+    "createdAt": "2023-11-22T08:15:00Z",
+    "isAssigned": true,
+    "isCompleted": false,
+    "description": "Improve the performance of database queries to reduce load time."
+  },
+  {
+    "id": 5,
+    "supervisor_id": 105,
+    "name": "Design Landing Page",
+    "priority": 2,
+    "createdAt": "2023-11-19T16:00:00Z",
+    "isAssigned": true,
+    "isCompleted": true,
+    "description": "Create a visually appealing and functional landing page for the website."
+  }
+]

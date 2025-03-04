@@ -17,16 +17,15 @@ const TaskForm = () => {
           />
         </div>
 
-        <div className="mb-6">
-          <label htmlFor="priority" className="block text-lg font-medium text-gray-700 mb-2">
-            Priority
-          </label>
-          <input
-            id="priority"
-            type="number"
-            placeholder="Lower number = higher priority"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Priority</label>
+          <select
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
         </div>
 
         <button
