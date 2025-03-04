@@ -24,10 +24,7 @@ const generateAgent = (index) => {
 
 const seedUsers = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/job-scheduler", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect("mongodb://localhost:27017/job-scheduler");
     console.log("Connected to MongoDB");
 
     const supervisor = new User({
