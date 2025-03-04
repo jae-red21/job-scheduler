@@ -8,7 +8,7 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent ) => {
     e.preventDefault();
     try {
-        axios.get('http://localhost:')
+        axios.post('http://localhost:8000')
     }catch (error) {
       console.log(error)
     }
