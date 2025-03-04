@@ -30,3 +30,5 @@ const login = async (req, res) => {
 };
 
 router.post("/api/auth/login", login);
+
+export default router

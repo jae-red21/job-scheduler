@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 
 const Login = () => {
@@ -8,10 +8,21 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent ) => {
     e.preventDefault();
     try {
-        axios.post('http://localhost:8000')
-    }catch (error) {
-      console.log(error)
-    }
+        axios.post('http://localhost:8000/api/auth/login', {
+          email, password,
+        })
+    }catch (error ) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        // The request was made and the server responded with a status code
+        console.error('Login failed:', axiosError.response.data);
+      } else if (axiosError.request) {
+        // The request was made but no response was received
+        console.error('No response received:', axiosError.request);
+      } else {
+        // Something happened in setting up the request
+        console.error('Error:', axiosError.message);
+      }    }
   }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
