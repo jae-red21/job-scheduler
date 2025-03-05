@@ -12,9 +12,10 @@ function App() {
     <Navbar />
       <Routes>
         
-        {/* <Route path="/" element={<SupervisorDashboard tasks={tasks} />} /> */}
+        <Route path='/login' element={<Login />} />
+        {/* <Route path="/" element={<SupervisorDashboard tasks={tasks} />} />
+        <Route path="/supervisor-dashboard/new-task" element={<TaskForm />} /> */}
 
-        {/* <Route path="/supervisor-dashboard/new-task" element={<TaskForm />} /> */}
         <Route path='/agent-dashboard' element={<AgentDashboard tasks={tasks} />} />
       </Routes>
     </BrowserRouter>

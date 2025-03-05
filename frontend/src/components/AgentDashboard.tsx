@@ -9,7 +9,7 @@ type AgentProps = {
 
 const AgentDashboard = ({ tasks }: AgentProps) => {
   const [taskList, setTaskList] = useState<task[]>(tasks);
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const handleMarkComplete = (id: number) => {
     setTaskList((prevTasks) =>
@@ -19,11 +19,28 @@ const AgentDashboard = ({ tasks }: AgentProps) => {
     );
   };
 
+  // Function to format the date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  console.log("Tasks: ", taskList);
+  console.log("user", user);
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.username}</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          Welcome, {user?.username}
+        </h1>
         <button
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
@@ -45,9 +62,6 @@ const AgentDashboard = ({ tasks }: AgentProps) => {
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                 Created At
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                Supervisor
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                 Actions
@@ -72,10 +86,8 @@ const AgentDashboard = ({ tasks }: AgentProps) => {
                   {task.priority}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  {task.createdAt}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  {task.supervisor_id}
+                  {formatDate(task.createdAt)}{" "}
+                  {/* Use the formatDate function */}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <button

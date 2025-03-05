@@ -11,7 +11,7 @@ interface LoginFormInputs {
 
 const Login = () => {
   const [error, setError] = useState("");
-  const {login} = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -19,26 +19,30 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormInputs>();
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = async ({email, password}) => {
+  const onSubmit: SubmitHandler<LoginFormInputs> = async ({
+    email,
+    password,
+  }) => {
     try {
+      console.log({ email, password }); // Log the payload
       const response = await axios.post(
         "http://localhost:8000/api/auth/login",
-        {email, password}
+        { email, password }
       );
-      if(response.data.success) {
+      if (response.data.success) {
         login(response.data.user);
-        localStorage.setItem("token", response.data.token)
-        
+        localStorage.setItem("token", response.data.token);
+
         if (response.data.user.role === "agent") {
-          navigate('/agent-dashboard')
+          navigate("/agent-dashboard");
         } else {
-          navigate('/supervisor-dashboard')
+          navigate("/supervisor-dashboard");
         }
       }
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response) {
-        // Handle both string and object error messages
+        console.error("Server Response:", axiosError.response.data); // Log the full response
         const errorMessage =
           typeof axiosError.response.data === "string"
             ? axiosError.response.data
@@ -46,10 +50,8 @@ const Login = () => {
               "An error occurred. Please try again.";
         setError(errorMessage);
       } else if (axiosError.request) {
-        // No response received (e.g., network error)
         setError("No response from the server. Check your network connection.");
       } else {
-        // Unknown error (e.g., unexpected client-side error)
         setError("An unexpected error occurred. Please try again.");
       }
     }
