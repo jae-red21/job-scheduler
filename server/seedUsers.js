@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import {faker} from '@faker-js/faker';
 import User from "./models/User.js";
+import connectDB from './db/db.js'
 const hashPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
@@ -24,7 +25,7 @@ const generateAgent = (index) => {
 
 const seedUsers = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/job-scheduler");
+    connectDB()
     console.log("Connected to MongoDB");
 
     const supervisor = new User({

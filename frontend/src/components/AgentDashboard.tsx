@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { task } from "../types/task";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 
 type AgentProps = {
   tasks: task[];
@@ -8,6 +9,7 @@ type AgentProps = {
 
 const AgentDashboard = ({ tasks }: AgentProps) => {
   const [taskList, setTaskList] = useState<task[]>(tasks);
+  const {user} = useAuth();
 
   const handleMarkComplete = (id: number) => {
     setTaskList((prevTasks) =>
@@ -21,7 +23,7 @@ const AgentDashboard = ({ tasks }: AgentProps) => {
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Welcome</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.username}</h1>
         <button
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"

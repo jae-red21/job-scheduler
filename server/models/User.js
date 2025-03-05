@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, enum: ["supervisor", "agent"], required: true },
   isAvailable: {
-    type: String,
+    type: Boolean,
     default: function () {
       return this.role === 'agent';
     },

@@ -1,19 +1,20 @@
 import React from "react";
 import { task } from "../types/task";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 
 type Props = {
   tasks: task[];
 };
 
 const SupervisorDashboard = ({ tasks }: Props) => {
+  const {user} = useAuth();
   const theadStyle = "py-2 px-4 border-b font-semibold text-left";
-
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Welcome</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.username}</h1>
       </div>
 
       {/* Table Section */}
