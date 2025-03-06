@@ -1,6 +1,6 @@
 import React from "react";
 import { task } from "../types/task";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 
 type Props = {
@@ -8,13 +8,35 @@ type Props = {
 };
 
 const SupervisorDashboard = ({ tasks }: Props) => {
-  const {user} = useAuth();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (!user) {
+    navigate("/login");
+  }
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   const theadStyle = "py-2 px-4 border-b font-semibold text-left";
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.username}</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          Welcome, {user?.username}
+        </h1>
       </div>
 
       {/* Table Section */}
@@ -48,7 +70,7 @@ const SupervisorDashboard = ({ tasks }: Props) => {
                   {task.priority}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                  {task.createdAt}
+                  {formatDate(task.createdAt)}{" "}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                   {task.isAssigned ? "Assigned" : "Not Yet"}

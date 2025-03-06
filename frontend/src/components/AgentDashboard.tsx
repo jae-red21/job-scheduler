@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { task } from "../types/task";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 
 type AgentProps = {
@@ -9,7 +9,17 @@ type AgentProps = {
 
 const AgentDashboard = ({ tasks }: AgentProps) => {
   const [taskList, setTaskList] = useState<task[]>(tasks);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  const navigate = useNavigate();
+
+  if(loading) {
+    return <p>Loading...</p>
+  }
+
+  if (!user) {
+    navigate('/login')
+  }
 
   const handleMarkComplete = (id: number) => {
     setTaskList((prevTasks) =>

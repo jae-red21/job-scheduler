@@ -13,8 +13,8 @@ function App() {
       <Routes>
         
         <Route path='/login' element={<Login />} />
-        {/* <Route path="/" element={<SupervisorDashboard tasks={tasks} />} />
-        <Route path="/supervisor-dashboard/new-task" element={<TaskForm />} /> */}
+        <Route path="/" element={<SupervisorDashboard tasks={tasks} />}  />
+        <Route path="/supervisor-dashboard/new-task" element={<TaskForm />} /> 
 
         <Route path='/agent-dashboard' element={<AgentDashboard tasks={tasks} />} />
       </Routes>

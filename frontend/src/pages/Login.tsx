@@ -9,8 +9,18 @@ interface LoginFormInputs {
   password: string;
 }
 
+interface LoginResponse {
+  success: boolean;
+  user: {
+    _id: string;
+    username: string;
+    role: string;
+  };
+  token: string
+}
+
 const Login = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
   const navigate = useNavigate();
   const {
@@ -23,37 +33,54 @@ const Login = () => {
     email,
     password,
   }) => {
+    setError(null);
+
     try {
       console.log({ email, password }); // Log the payload
-      const response = await axios.post(
+      const response = await axios.post<LoginResponse>(
         "http://localhost:8000/api/auth/login",
         { email, password }
       );
-      if (response.data.success) {
+
+      if (response.data?.success) {
         login(response.data.user);
         localStorage.setItem("token", response.data.token);
 
-        if (response.data.user.role === "agent") {
+        const {role} = response.data.user;
+
+        if (role === "agent") {
           navigate("/agent-dashboard");
-        } else {
+        } else if (role === "supervisor") {
           navigate("/supervisor-dashboard");
+        } else {
+          navigate("/")
         }
+      } else {
+        setError('Login failed. Please check your credentials.')
       }
     } catch (error) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response) {
-        console.error("Server Response:", axiosError.response.data); // Log the full response
-        const errorMessage =
-          typeof axiosError.response.data === "string"
-            ? axiosError.response.data
-            : (axiosError.response.data as { message?: string })?.message ||
-              "An error occurred. Please try again.";
-        setError(errorMessage);
-      } else if (axiosError.request) {
-        setError("No response from the server. Check your network connection.");
+      if (axios.isAxiosError(error)) {
+        console.error("Axios Error: ", error)
+
+        if (error.response) {
+          if (error.response.status === 404) {
+            setError("Login endpoint not found. Check the API URL");
+          } else if (error.response.status === 401) {
+            setError("Invalid email or password");
+          } else {
+            setError(`Error: ${error.response.statusText}`)
+          }
+        } else if (error.request) {
+          setError("No response from the server. Is it running?");
+        }else {
+          setError("Unexpected error occurred. Try again later.");
+        }
       } else {
-        setError("An unexpected error occurred. Please try again.");
+        console.error("Unexpected Error:", error);
+        setError("An unexpected error occurred.")
       }
+
+      
     }
   };
   return (
