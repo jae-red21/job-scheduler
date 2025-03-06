@@ -11,11 +11,12 @@ const SupervisorDashboard = ({ tasks }: Props) => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
-  if (loading) {
-    return <p>Loading...</p>;
+  if(loading) {
+    return <p>Loading...</p>
   }
+
   if (!user) {
-    navigate("/login");
+    navigate('/login')
   }
 
   const formatDate = (dateString: string) => {

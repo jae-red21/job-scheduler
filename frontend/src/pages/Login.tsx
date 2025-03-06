@@ -1,5 +1,5 @@
-import axios, { AxiosError } from "axios";
-import React, { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "../contexts/authContext";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ interface LoginResponse {
   user: {
     _id: string;
     username: string;
-    role: string;
+    role: "agent" | "supervisor"
   };
   token: string
 }

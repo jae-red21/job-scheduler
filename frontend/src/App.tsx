@@ -9,9 +9,8 @@ import AgentDashboard from "./components/AgentDashboard";
 function App() {
   return (
     <BrowserRouter>
-    <Navbar />
       <Routes>
-        
+        <Route path="/" element={<Login />} />
         <Route path='/login' element={<Login />} />
         <Route path="/" element={<SupervisorDashboard tasks={tasks} />}  />
         <Route path="/supervisor-dashboard/new-task" element={<TaskForm />} /> 
