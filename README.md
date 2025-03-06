@@ -40,7 +40,7 @@ A job scheduling application built with React, Tailwind CSS, TypeScript, Express
     npm start
 ### Backend
 
-1.Navigate to the directory:
+1. Navigate to the directory:
    ```bash
    cd job-scheduler/backend
 2. Install the dependencies:
